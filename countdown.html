@@ -1,0 +1,49 @@
+<!-- Display the countdown timer in an element -->
+<p id="counter"></p>
+
+<script>
+// get expire date in miliseconds
+let countDownDate = new Date('Oct 1, 2022 15:37:25').getTime();
+
+//countDownTime = new Date().getTime() + 901800; // 15 minutes counter from now
+
+
+ let OneDayInMiliseconds     = 24 * 60 * 60 * 1000;
+ let OneHourInMiliseconds    = 60 * 60 * 1000; 
+ let OneMinuteInMiliseconds  = 60 * 1000;
+
+
+//calculate in every second
+let x = setInterval(function() {
+
+  // Get today's date and time in miliseconds
+  let now = new Date().getTime();
+  let differenceInMiliseconds = countDownDate - now;
+
+  //get the days
+  let days = Math.floor(differenceInMiliseconds / OneDayInMiliseconds);
+  //subtract days miliseconds 
+  differenceInMiliseconds = differenceInMiliseconds -  (days * OneDayInMiliseconds);
+  //get the hours
+  let hours = Math.floor(differenceInMiliseconds/OneHourInMiliseconds);
+  //subtract hours miliseconds
+  differenceInMiliseconds = differenceInMiliseconds - (hours * OneHourInMiliseconds);
+  //get the minutes
+  let minutes = Math.floor(differenceInMiliseconds / OneMinuteInMiliseconds);
+  //subtract minutes miliseconds 
+  differenceInMiliseconds = differenceInMiliseconds - (minutes * OneMinuteInMiliseconds);
+
+  // get the seconds
+  let seconds = Math.floor(differenceInMiliseconds/ 1000);
+
+  // Display the result in the element with id="counter"
+  document.getElementById("counter").innerHTML = days + " days " + hours + " hours "
+  + minutes + " minutes " + seconds + " seconds";
+
+  // If the count down is finished, write some text
+  if (differenceInMiliseconds < 0) {
+    clearInterval(x);
+    document.getElementById("counter").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
